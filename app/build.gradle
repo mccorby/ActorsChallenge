@@ -1,0 +1,60 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+    }
+}
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "21.1.2"
+
+    compileOptions {
+        // Force encoding in the app to be UTF-8.
+        // See http://tools.android.com/knownissues/encoding
+        encoding "UTF-8"
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    defaultConfig {
+        applicationId "com.mccorby.paytouchchallenge.domain.paytouchchallenge"
+        minSdkVersion 14
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        debug {
+            // Define constant fields used in the app. Note that if there are differences between
+            // the build types for a constant, this must be defined in the corresponding build types.
+            buildConfigField "String", "BACKEND_URL", "\"http://testandroid.pay-touch.com:8080/swagger-ui/\""
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile 'de.greenrobot:eventbus:2.4.0'
+    apt 'com.google.dagger:dagger-compiler:2.0'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile 'com.google.dagger:dagger:2.0'
+
+
+    compile project(':domain')
+    compile project(':presentation')
+    compile project(':datasource')
+
+}
