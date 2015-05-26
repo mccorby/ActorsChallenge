@@ -1,9 +1,12 @@
 package com.mccorby.paytouchchallenge.presentation.main;
 
+import com.mccorby.paytouchchallenge.Constants;
 import com.mccorby.paytouchchallenge.domain.abstractions.Bus;
 import com.mccorby.paytouchchallenge.domain.entities.Actor;
 import com.mccorby.paytouchchallenge.domain.interactors.InteractorInvoker;
 import com.mccorby.paytouchchallenge.domain.interactors.actors.GetActorsInteractor;
+import com.mccorby.paytouchchallenge.presentation.model.Mapper;
+import com.mccorby.paytouchchallenge.presentation.model.PresentationActor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,10 +44,10 @@ public class MainPresenter extends com.mccorby.paytouchchallenge.presentation.Pr
      * @param actorList
      */
     public void onEvent(List<Actor> actorList) {
-        List<com.mccorby.paytouchchallenge.presentation.model.PresentationActor> presentationActors = new ArrayList<>(actorList.size());
+        List<PresentationActor> presentationActors = new ArrayList<>(actorList.size());
 
         for (Actor actor : actorList) {
-            com.mccorby.paytouchchallenge.presentation.model.PresentationActor presentationActor = com.mccorby.paytouchchallenge.presentation.model.Mapper.modelToData(actor);
+            PresentationActor presentationActor = Mapper.modelToData(actor);
             presentationActors.add(presentationActor);
         }
 
@@ -59,5 +62,16 @@ public class MainPresenter extends com.mccorby.paytouchchallenge.presentation.Pr
     @Override
     public void onPause() {
         mBus.unregister(this);
+    }
+
+
+    public void sortList(int sortType) {
+        switch (sortType) {
+            case Constants.SORT_BY_NAME:
+
+                break;
+            case Constants.SORT_BY_POPULARITY:
+                break;
+        }
     }
 }

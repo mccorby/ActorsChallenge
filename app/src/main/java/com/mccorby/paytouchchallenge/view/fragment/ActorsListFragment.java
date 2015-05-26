@@ -33,6 +33,8 @@ import com.mccorby.paytouchchallenge.repository.datasources.NetworkDatasource;
 import com.mccorby.paytouchchallenge.view.activity.DetailActivity;
 import com.mccorby.paytouchchallenge.view.adapter.ActorListAdapter;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -121,14 +123,40 @@ public class ActorsListFragment extends Fragment implements MainView, ActorListA
     }
 
     @Override
-    public void refreshUi() {
-
-    }
-
-    @Override
     public void onActorSelected(PresentationActor actor) {
         Intent intent = new Intent(getActivity(), DetailActivity.class);
         intent.putExtra(Constants.ARG_ACTOR, actor);
         getActivity().startActivity(intent);
+    }
+
+    public void sortList(int sortType) {
+
+        if (mAdapter.getActorList() != null) {
+            // Following MVP the presenter should sort the list and return it to the view
+            // We are shortcircuiting it for simplicity sake
+            // mPresenter.sortList(sortType);
+            List<PresentationActor> actorList = mAdapter.getActorList();
+            Comparator<PresentationActor> comparator = null;
+            switch (sortType) {
+                case Constants.SORT_BY_POPULARITY:
+                    comparator = new Comparator<PresentationActor>() {
+                        @Override
+                        public int compare(PresentationActor lhs, PresentationActor rhs) {
+                            return Math.round(lhs.getPopularity() - rhs.getPopularity());
+                        }
+                    };
+                    break;
+                case Constants.SORT_BY_NAME:
+                    comparator = new Comparator<PresentationActor>() {
+                        @Override
+                        public int compare(PresentationActor lhs, PresentationActor rhs) {
+                            return lhs.getName().compareToIgnoreCase(rhs.getName());
+                        }
+                    };
+                    break;
+            }
+            Collections.sort(actorList, comparator);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 }

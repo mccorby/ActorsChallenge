@@ -6,4 +6,7 @@ package com.mccorby.paytouchchallenge;
 public class Constants {
 
     public static final String ARG_ACTOR = "argActor";
+
+    public static final int SORT_BY_NAME = 0;
+    public static final int SORT_BY_POPULARITY = 1;
 }

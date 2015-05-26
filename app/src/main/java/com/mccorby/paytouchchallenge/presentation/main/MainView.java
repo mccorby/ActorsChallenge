@@ -11,5 +11,4 @@ public interface MainView {
 
     void refreshActorList(List<com.mccorby.paytouchchallenge.presentation.model.PresentationActor> actorList);
 
-    void refreshUi();
 }

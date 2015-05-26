@@ -33,6 +33,10 @@ public class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.View
         this.mActorList = actors;
     }
 
+    public List<PresentationActor> getActorList() {
+        return mActorList;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_actor_list, parent, false);
