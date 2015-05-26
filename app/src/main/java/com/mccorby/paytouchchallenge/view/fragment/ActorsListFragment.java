@@ -4,6 +4,8 @@ package com.mccorby.paytouchchallenge.view.fragment;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.mccorby.paytouchchallenge.domain.InteractorInvokerImpl;
 import com.mccorby.paytouchchallenge.domain.abstractions.Bus;
 import com.mccorby.paytouchchallenge.domain.interactors.InteractorInvoker;
 import com.mccorby.paytouchchallenge.domain.interactors.actors.GetActorsInteractor;
+import com.mccorby.paytouchchallenge.domain.paytouchchallenge.BuildConfig;
 import com.mccorby.paytouchchallenge.domain.paytouchchallenge.R;
 import com.mccorby.paytouchchallenge.domain.repository.ActorsRepository;
 import com.mccorby.paytouchchallenge.presentation.main.MainPresenter;
@@ -25,24 +28,23 @@ import com.mccorby.paytouchchallenge.presentation.model.PresentationActor;
 import com.mccorby.paytouchchallenge.repository.ActorsRepositoryImpl;
 import com.mccorby.paytouchchallenge.repository.datasources.LocalDatasource;
 import com.mccorby.paytouchchallenge.repository.datasources.NetworkDatasource;
+import com.mccorby.paytouchchallenge.view.adapter.ActorListAdapter;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
-
-import javax.inject.Inject;
 
 import retrofit.RestAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ActorsListFragment extends Fragment implements MainView {
+public class ActorsListFragment extends Fragment implements MainView, ActorListAdapter.OnActorListItemAction {
 
     private static final String TAG = ActorsListFragment.class.getSimpleName();
 
     MainPresenter mPresenter;
+    private ActorListAdapter mAdapter;
 
     public ActorsListFragment() {
         // Required empty public constructor
@@ -75,7 +77,7 @@ public class ActorsListFragment extends Fragment implements MainView {
     private void injectObjects() {
         // TODO RestAdapter should be a singleton
         ActorsApiService actorsApiService = new RestAdapter.Builder()
-                .setEndpoint("http://testandroid.pay-touch.com:8080/android-test/rest/actors")
+                .setEndpoint(BuildConfig.BACKEND_URL)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build()
                 .create(ActorsApiService.class);
@@ -93,18 +95,35 @@ public class ActorsListFragment extends Fragment implements MainView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_actors_list, container, false);
+
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.fragment_actors_list_rv);
+        // Use a linear layout manager
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        mAdapter = new ActorListAdapter(null, this);
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.setHasFixedSize(true);
+
         mPresenter.onCreate();
-        return inflater.inflate(R.layout.fragment_actors_list, container, false);
+        return rootView;
     }
 
 
     @Override
     public void refreshActorList(List<PresentationActor> actorList) {
-        Log.d(TAG, "Fragment. Refreshing actor list");
+        Log.d(TAG, "Fragment. Refreshing actor list " + actorList.size());
+        mAdapter.setActorList(actorList);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void refreshUi() {
+
+    }
+
+    @Override
+    public void onActorSelected(PresentationActor actor) {
 
     }
 }

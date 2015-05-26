@@ -53,6 +53,7 @@ public class Mapper {
         actor.setLocation(modelActor.getLocation());
         actor.setName(modelActor.getName());
         actor.setProfileImageUrl(modelActor.getProfileImageUrl());
+        actor.setPopularity(modelActor.getPopularity());
         List<PresentationWork> works = new ArrayList<>(modelActor.getKnownFor().size());
         for (Work work : modelActor.getKnownFor()) {
             works.add(Mapper.modelToData(work));

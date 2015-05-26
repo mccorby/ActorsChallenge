@@ -1,6 +1,6 @@
 package com.mccorby.paytouchchallenge.datasource.api.responses;
 
-import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.mccorby.paytouchchallenge.datasource.api.entities.ApiActor;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 public class ActorsApiResponse {
 
     /** Attribute as defined by the JSON. */
-    @Expose
+    @SerializedName("data")
     private List<ApiActor> actors;
 
     public List<ApiActor> getActors() {

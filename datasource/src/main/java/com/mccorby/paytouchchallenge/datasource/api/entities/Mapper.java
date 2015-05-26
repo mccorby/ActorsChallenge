@@ -19,6 +19,7 @@ public class Mapper {
         actor.setLocation(apiActor.getLocation());
         actor.setName(apiActor.getName());
         actor.setProfileImageUrl(apiActor.getProfileImageUrl());
+        actor.setPopularity(apiActor.getPopularity());
         List<Work> works = new ArrayList<>(apiActor.getKnownFor().size());
         for (ApiWork work : apiActor.getKnownFor()) {
             works.add(Mapper.transformWork(work));

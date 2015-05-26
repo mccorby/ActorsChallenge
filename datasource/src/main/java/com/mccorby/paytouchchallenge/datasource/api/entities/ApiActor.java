@@ -1,7 +1,6 @@
 package com.mccorby.paytouchchallenge.datasource.api.entities;
 
 import com.google.gson.annotations.SerializedName;
-import com.mccorby.paytouchchallenge.domain.entities.Work;
 
 import java.util.List;
 
@@ -24,6 +23,8 @@ public class ApiActor {
     private boolean isAdult;
     @SerializedName("known_for")
     private List<ApiWork> mKnownFor;
+    @SerializedName("popularity")
+    private float mPopularity;
 
     public Integer getIdentifier() {
         return mIdentifier;
@@ -92,5 +93,13 @@ public class ApiActor {
                 ", isAdult=" + isAdult +
                 ", mKnownFor=" + mKnownFor +
                 '}';
+    }
+
+    public float getPopularity() {
+        return mPopularity;
+    }
+
+    public void setPopularity(float popularity) {
+        mPopularity = popularity;
     }
 }

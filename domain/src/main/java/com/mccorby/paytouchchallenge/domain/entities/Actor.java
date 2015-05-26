@@ -12,6 +12,7 @@ public class Actor {
     private String mLocation;
     private String mDescription;
     private boolean isAdult;
+    private float mPopularity;
 
     private List<Work> mKnownFor;
 
@@ -74,5 +75,13 @@ public class Actor {
 
     public void setKnownFor(List<Work> knownFor) {
         mKnownFor = knownFor;
+    }
+
+    public float getPopularity() {
+        return mPopularity;
+    }
+
+    public void setPopularity(float popularity) {
+        mPopularity = popularity;
     }
 }

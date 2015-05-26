@@ -1,14 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
-    }
-}
 
 android {
     compileSdkVersion 22
@@ -34,27 +26,28 @@ android {
         debug {
             // Define constant fields used in the app. Note that if there are differences between
             // the build types for a constant, this must be defined in the corresponding build types.
-            buildConfigField "String", "BACKEND_URL", "\"http://testandroid.pay-touch.com:8080/swagger-ui/\""
+            buildConfigField "String", "BACKEND_URL", "\"http://testandroid.pay-touch.com:8080/android-test/rest/actors\""
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // Define constant fields used in the app. Note that if there are differences between
+            // the build types for a constant, this must be defined in the corresponding build types.
+            buildConfigField "String", "BACKEND_URL", "\"http://testandroid.pay-touch.com:8080/android-test/rest/actors\""
         }
     }
 }
 
 dependencies {
-
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'de.greenrobot:eventbus:2.4.0'
+    // Dagger related dependencies
+    compile 'com.google.dagger:dagger:2.0'
     apt 'com.google.dagger:dagger-compiler:2.0'
     provided 'org.glassfish:javax.annotation:10.0-b28'
-    compile 'com.google.dagger:dagger:2.0'
-
 
     compile project(':domain')
     compile project(':presentation')
     compile project(':datasource')
-
 }

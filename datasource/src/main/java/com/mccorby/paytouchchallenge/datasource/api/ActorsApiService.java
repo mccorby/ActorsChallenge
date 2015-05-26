@@ -1,9 +1,6 @@
 package com.mccorby.paytouchchallenge.datasource.api;
 
-import com.mccorby.paytouchchallenge.datasource.api.entities.ApiActor;
 import com.mccorby.paytouchchallenge.datasource.api.responses.ActorsApiResponse;
-
-import java.util.List;
 
 import retrofit.http.GET;
 
@@ -12,6 +9,6 @@ import retrofit.http.GET;
  */
 public interface ActorsApiService {
 
-    @GET("/")
+    @GET("/?page=1")
     ActorsApiResponse getActors();
 }
