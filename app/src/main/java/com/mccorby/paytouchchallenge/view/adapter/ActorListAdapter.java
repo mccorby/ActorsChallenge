@@ -1,6 +1,8 @@
 package com.mccorby.paytouchchallenge.view.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,8 @@ import android.widget.TextView;
 
 import com.mccorby.paytouchchallenge.domain.paytouchchallenge.R;
 import com.mccorby.paytouchchallenge.presentation.model.PresentationActor;
+import com.mccorby.paytouchchallenge.view.transformation.CircleTransform;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -19,12 +23,14 @@ public class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.View
 
     private List<PresentationActor> mActorList;
     private OnActorListItemAction mListener;
+    private Context mContext;
 
     public interface OnActorListItemAction {
         void onActorSelected(PresentationActor actor);
     }
 
-    public ActorListAdapter(List<PresentationActor> actors, OnActorListItemAction listener) {
+    public ActorListAdapter(Context context, List<PresentationActor> actors, OnActorListItemAction listener) {
+        this.mContext = context;
         this.mActorList = actors;
         this.mListener = listener;
     }
@@ -51,6 +57,12 @@ public class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.View
         viewHolder.mDescriptionTv.setText(actor.getDescription());
         viewHolder.mLocationTv.setText(actor.getLocation());
         viewHolder.mNameTv.setText(actor.getName());
+        if (!TextUtils.isEmpty(actor.getProfileImageUrl())) {
+            Picasso.with(mContext)
+                    .load(actor.getProfileImageUrl())
+                    .transform(new CircleTransform())
+                    .into(viewHolder.mImageView);
+        }
     }
 
     @Override

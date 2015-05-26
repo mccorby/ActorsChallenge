@@ -106,7 +106,7 @@ public class ActorsListFragment extends Fragment implements MainView, ActorListA
         // Use a linear layout manager
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new ActorListAdapter(null, this);
+        mAdapter = new ActorListAdapter(getActivity(), null, this);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setHasFixedSize(true);
 

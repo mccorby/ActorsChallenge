@@ -2,6 +2,7 @@ package com.mccorby.paytouchchallenge.view.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.mccorby.paytouchchallenge.domain.paytouchchallenge.R;
 import com.mccorby.paytouchchallenge.presentation.model.PresentationWork;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -40,6 +42,11 @@ public class WorkListAdapter extends RecyclerView.Adapter<WorkListAdapter.ViewHo
         viewHolder.mReleaseDate.setText(String.format("%d", work.getReleaseDate()));
         viewHolder.mPopularity.setText(String.format("%.2f", work.getPopularity()));
         viewHolder.mVotes.setText("" + work.getVoteCount());
+        if (!TextUtils.isEmpty(work.getPosterUrl())) {
+            Picasso.with(mContext)
+                    .load(work.getPosterUrl())
+                    .into(viewHolder.mImageView);
+        }
     }
 
     @Override
