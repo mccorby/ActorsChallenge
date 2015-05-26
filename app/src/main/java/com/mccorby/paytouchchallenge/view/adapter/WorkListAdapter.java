@@ -13,6 +13,8 @@ import com.mccorby.paytouchchallenge.domain.paytouchchallenge.R;
 import com.mccorby.paytouchchallenge.presentation.model.PresentationWork;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,7 +41,9 @@ public class WorkListAdapter extends RecyclerView.Adapter<WorkListAdapter.ViewHo
         PresentationWork work = mWorkList.get(i);
 
         viewHolder.mTitle.setText(work.getTitle());
-        viewHolder.mReleaseDate.setText(String.format("%d", work.getReleaseDate()));
+        Date date = new Date(work.getReleaseDate());
+        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(mContext);
+        viewHolder.mReleaseDate.setText(dateFormat.format(date));
         viewHolder.mPopularity.setText(String.format("%.2f", work.getPopularity()));
         viewHolder.mVotes.setText("" + work.getVoteCount());
         if (!TextUtils.isEmpty(work.getPosterUrl())) {

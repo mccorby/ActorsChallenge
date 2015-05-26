@@ -1,6 +1,7 @@
 package com.mccorby.paytouchchallenge.view.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -63,6 +64,28 @@ public class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.View
                     .transform(new CircleTransform())
                     .into(viewHolder.mImageView);
         }
+        int textColor;
+        if ((i & 1 ) == 0) {
+            // Even rows
+            textColor  = mContext.getResources().getColor(android.R.color.primary_text_dark);
+            viewHolder.mWrapper.setCardBackgroundColor(mContext.getResources().getColor(R.color.even_row_bg));
+            viewHolder.mLocationTv
+                    .setCompoundDrawablesWithIntrinsicBounds(
+                            R.mipmap.pin_white, 0, 0, 0);
+
+        } else {
+            // Odd rows
+            textColor = mContext.getResources().getColor(android.R.color.primary_text_light);
+            viewHolder.mWrapper.setCardBackgroundColor(mContext.getResources().getColor(R.color.odd_row_bg));
+            viewHolder.mLocationTv
+                    .setCompoundDrawablesWithIntrinsicBounds(
+                            R.mipmap.pin_black, 0, 0, 0);
+
+        }
+        viewHolder.mDescriptionTv.setTextColor(textColor);
+        viewHolder.mNameTv.setTextColor(textColor);
+        viewHolder.mPopularityTv.setTextColor(textColor);
+        viewHolder.mLocationTv.setTextColor(textColor);
     }
 
     @Override
@@ -72,6 +95,7 @@ public class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
+        CardView mWrapper;
         ImageView mImageView;
         TextView mNameTv;
         TextView mLocationTv;
@@ -80,6 +104,7 @@ public class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.View
 
         public ViewHolder(View itemView) {
             super(itemView);
+            mWrapper = (CardView) itemView.findViewById(R.id.card_view);
             mImageView = (ImageView) itemView.findViewById(R.id.item_actor_list_image);
             mNameTv = (TextView) itemView.findViewById(R.id.item_actor_list_name_tv);
             mLocationTv = (TextView) itemView.findViewById(R.id.item_actor_list_location_tv);

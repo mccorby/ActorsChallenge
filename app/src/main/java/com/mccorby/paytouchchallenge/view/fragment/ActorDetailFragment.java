@@ -9,12 +9,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mccorby.paytouchchallenge.Constants;
 import com.mccorby.paytouchchallenge.domain.paytouchchallenge.R;
 import com.mccorby.paytouchchallenge.presentation.model.PresentationActor;
 import com.mccorby.paytouchchallenge.view.adapter.WorkListAdapter;
+import com.mccorby.paytouchchallenge.view.transformation.CircleTransform;
+import com.squareup.picasso.Picasso;
 
 /**
  *
@@ -57,10 +60,16 @@ public class ActorDetailFragment extends Fragment {
         TextView nameTv = (TextView) rootView.findViewById(R.id.detail_actor_name_tv);
         TextView locationTv = (TextView) rootView.findViewById(R.id.detail_actor_location_tv);
         TextView descriptionTv = (TextView) rootView.findViewById(R.id.detail_actor_description_tv);
+        ImageView profileImg = (ImageView) rootView.findViewById(R.id.detail_actor_image);
+        Picasso.with(getActivity())
+                .load(mActor.getProfileImageUrl())
+                .transform(new CircleTransform())
+                .into(profileImg);
 
         nameTv.setText(mActor.getName());
         locationTv.setText(mActor.getLocation());
         descriptionTv.setText(mActor.getDescription());
+
 
     }
 

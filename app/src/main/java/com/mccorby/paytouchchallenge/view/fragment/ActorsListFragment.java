@@ -9,6 +9,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -58,6 +61,7 @@ public class ActorsListFragment extends Fragment implements MainView, ActorListA
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -110,6 +114,7 @@ public class ActorsListFragment extends Fragment implements MainView, ActorListA
         recyclerView.setAdapter(mAdapter);
         recyclerView.setHasFixedSize(true);
 
+
         mPresenter.onCreate();
         return rootView;
     }
@@ -129,11 +134,34 @@ public class ActorsListFragment extends Fragment implements MainView, ActorListA
         getActivity().startActivity(intent);
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_sort_by_name:
+                sortList(Constants.SORT_BY_NAME);
+                return true;
+            case R.id.action_sort_by_popularity:
+                sortList(Constants.SORT_BY_POPULARITY);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     /**
      * Sort the list in this fragment
      * @param sortType
      */
-    public void sortList(int sortType) {
+    private void sortList(int sortType) {
         if (mAdapter.getActorList() != null) {
             // Following MVP the presenter should sort the list and return it to the view
             // We are shortcircuiting it for simplicity sake

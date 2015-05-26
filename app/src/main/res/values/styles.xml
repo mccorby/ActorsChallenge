@@ -3,6 +3,29 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:spinnerItemStyle">@style/SpinnerTextViewItem</item>
+        <item name="android:spinnerDropDownItemStyle">@style/SpinnerTextViewItem</item>
     </style>
 
+    <style name="ToolbarStyle">
+        <item name="android:background">@android:color/background_dark</item>
+    </style>
+
+    <style name="SpinnerTextViewItem" parent="@android:style/Widget.TextView" >
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@android:color/holo_green_dark</item>
+    </style>
+
+
+    <style name="TitleText" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/abc_text_size_headline_material</item>
+    </style>
+
+    <style name="DescriptionText" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/abc_text_size_body_1_material</item>
+    </style>
+
+    <style name="WorkTitle">parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/abc_text_size_large_material</item>
+    </style>
 </resources>

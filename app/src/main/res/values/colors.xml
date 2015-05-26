@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="even_row_bg">#747474</color>
+    <color name="odd_row_bg">#FFFFFF</color>
+</resources>

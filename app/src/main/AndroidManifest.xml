@@ -23,6 +23,7 @@
             android:name="com.mccorby.paytouchchallenge.view.activity.DetailActivity"
             android:label="@string/title_activity_detail" >
         </activity>
+
     </application>
 
 </manifest>
