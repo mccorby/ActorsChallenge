@@ -3,6 +3,7 @@ package com.mccorby.paytouchchallenge.view.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mccorby.paytouchchallenge.Constants;
 import com.mccorby.paytouchchallenge.datasource.api.ActorsApiService;
 import com.mccorby.paytouchchallenge.datasource.api.NetworkDatasourceImpl;
 import com.mccorby.paytouchchallenge.datasource.memory.LocalDatasourceImpl;
@@ -28,6 +30,7 @@ import com.mccorby.paytouchchallenge.presentation.model.PresentationActor;
 import com.mccorby.paytouchchallenge.repository.ActorsRepositoryImpl;
 import com.mccorby.paytouchchallenge.repository.datasources.LocalDatasource;
 import com.mccorby.paytouchchallenge.repository.datasources.NetworkDatasource;
+import com.mccorby.paytouchchallenge.view.activity.DetailActivity;
 import com.mccorby.paytouchchallenge.view.adapter.ActorListAdapter;
 
 import java.util.List;
@@ -124,6 +127,8 @@ public class ActorsListFragment extends Fragment implements MainView, ActorListA
 
     @Override
     public void onActorSelected(PresentationActor actor) {
-
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        intent.putExtra(Constants.ARG_ACTOR, actor);
+        getActivity().startActivity(intent);
     }
 }

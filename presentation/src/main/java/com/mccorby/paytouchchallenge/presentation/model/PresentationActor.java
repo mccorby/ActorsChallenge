@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by JAC on 18/05/2015.
  */
-public class PresentationActor {
+public class PresentationActor implements Parcelable {
 
     private Integer mIdentifier;
     private String mName;

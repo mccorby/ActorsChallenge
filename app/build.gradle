@@ -48,6 +48,5 @@ dependencies {
     provided 'org.glassfish:javax.annotation:10.0-b28'
 
     compile project(':domain')
-    compile project(':presentation')
     compile project(':datasource')
 }

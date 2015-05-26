@@ -5,5 +5,5 @@ package com.mccorby.paytouchchallenge;
  */
 public class Constants {
 
-    public static final String BACKEND_URL = "http://testandroid.pay-touch.com:8080/swagger-ui/";
+    public static final String ARG_ACTOR = "argActor";
 }
