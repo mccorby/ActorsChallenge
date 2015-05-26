@@ -129,8 +129,11 @@ public class ActorsListFragment extends Fragment implements MainView, ActorListA
         getActivity().startActivity(intent);
     }
 
+    /**
+     * Sort the list in this fragment
+     * @param sortType
+     */
     public void sortList(int sortType) {
-
         if (mAdapter.getActorList() != null) {
             // Following MVP the presenter should sort the list and return it to the view
             // We are shortcircuiting it for simplicity sake
